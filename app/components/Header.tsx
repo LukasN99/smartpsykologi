@@ -9,8 +9,7 @@ export default function Header() {
     { name: "About", href: "#about" },
     { name: "Products", href: "#products" },
     { name: "Articles", href: "#articles" },
-    { name: "Values", href: "#values" },
-    { name: "Careers", href: "#careers" },
+    { name: "Contact", href: "#contact" }, // Updated "Values" to "Contact"
   ];
 
   const setUnderlinePosition = (target: DOMRect) => {
@@ -53,13 +52,13 @@ export default function Header() {
         const rect = activeLink.getBoundingClientRect();
         underlineRef.current.style.left = `${rect.left}px`;
         underlineRef.current.style.width = `${rect.width}px`;
-        underlineRef.current.style.transition = "none"; // Ingen övergång vid uppstart
+        underlineRef.current.style.transition = "none"; // No transition on initialization
       }
     };
 
     initializeUnderline();
 
-    // Lägg till övergången efter initialiseringen
+    // Add transition after initialization
     setTimeout(() => {
       if (underlineRef.current) {
         underlineRef.current.style.transition = "left 0.3s ease, width 0.3s ease";
@@ -103,19 +102,19 @@ export default function Header() {
 
   return (
     <header
-      className="fixed top-0 z-50 bg-black/30 backdrop-blur-md box-border"
-      style={headerStyle}
+      className="fixed top-0 z-50 box-border w-full"
+      style={{ ...headerStyle, backgroundColor: "rgba(0, 0, 0, 0.005)" }}
     >
       <nav className="relative mx-auto flex justify-end py-4 px-6">
         <span
           ref={underlineRef}
-          className="nav-underline absolute bottom-0 h-[2px] bg-white"
+          className="nav-underline absolute bottom-0 h-[2px] bg-[#ffffff]"
         ></span>
         {navItems.map((item) => (
           <a
             key={item.name}
             href={item.href}
-            className="relative px-6 text-lg font-medium text-white hover:text-gray-300 transition-colors"
+            className="relative px-6 text-lg font-medium text-[#ffffff] hover:font-bold transition-all"
             onMouseEnter={handleHover}
             onMouseLeave={handleMouseLeave}
           >

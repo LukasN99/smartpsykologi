@@ -2,15 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* Import the Londrina Solid font */
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap');
 
 html, body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Londrina Solid', sans-serif; /* Use Londrina Solid as the primary font */
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Remove x scrollbars */
   height: 100%; /* Ensure full height for the layout */
   scroll-behavior: smooth; /* Enable smooth scrolling */
+  background: linear-gradient(90deg, rgb(205, 216, 175), rgb(135, 157, 139)); /* Corrected gradient syntax */
+  background-size: 300% 300%;
+  animation: gradientMove 10s infinite ease-in-out;
+  color: #072707; /* Ensure text is readable */
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 * {
