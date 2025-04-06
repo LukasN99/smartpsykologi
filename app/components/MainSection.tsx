@@ -16,7 +16,7 @@ export default function MainSection() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/background.png"
+            src="/Background.png"
             alt="Magnifying glass"
             fill
             style={{ 
