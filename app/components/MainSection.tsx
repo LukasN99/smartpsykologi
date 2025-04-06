@@ -6,22 +6,54 @@ export default function MainSection() {
   return (
     <section
       id="about"
-      className="relative w-full h-[150vh] flex flex-col items-center justify-center"
+      className="relative w-full h-screen flex items-center justify-center snap-start snap-always"
+      style={{
+        height: 'calc(100vh - 64px)', // Account for header height
+      }}
     >
-      {/* Main Section Content */}
-      <motion.div
-        className="flex flex-col items-center text-center max-w-4xl px-6 mb-16"
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2 }}
-      >
-        <h1 className="text-[#ffffff] text-6xl font-extrabold leading-tight">
-          Welcome to Smart Psychology
-        </h1>
-        <p className="text-[#ffffff] text-xl mt-4 max-w-3xl">
-          Discover the future of psychology with cutting-edge tools and insights.
-        </p>
-      </motion.div>
+      <div className="relative w-full max-w-7xl aspect-[16/9] rounded-lg overflow-hidden">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'url("/background.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <div className="relative z-10 p-12 flex flex-col justify-center h-full">
+          <motion.h1 
+            className="text-6xl md:text-7xl mb-4 text-[#E85C3A] font-bold"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Smart
+            <br />
+            Psychology
+          </motion.h1>
+          <motion.p 
+            className="text-xl mb-8 max-w-xl text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            A digital platform that simplifies access to evidence-based psychological treatment and self-help materials.
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <motion.button 
+              className="px-8 py-3 bg-[#E85C3A] text-white rounded-lg hover:bg-[#d54c2d] transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              LEARN MORE
+            </motion.button>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

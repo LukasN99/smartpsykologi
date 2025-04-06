@@ -24,7 +24,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full h-screen bg-transparent flex flex-col items-center justify-center p-8"
+      className="h-[100vh] bg-[#faefe0] py-20 px-4 snap-start snap-always overflow-y-auto"
     >
       <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl gap-8">
         {/* Contact Form */}
@@ -81,7 +81,7 @@ export default function ContactSection() {
         <div className="flex flex-col w-full md:w-1/2 p-6">
           <h2 className="text-[#ffffff] text-3xl font-bold mb-2">Contact Us</h2>
           <p className="text-[#ffffff] text-sm mb-4">
-            We are here to assist you with any inquiries. Reach out to us, and we’ll get back to you promptly.
+            We are here to assist you with any inquiries. Reach out to us, and we'll get back to you promptly.
           </p>
           <p className="text-[#ffffff] text-sm font-bold mb-4">Phone: +46 123 456 789</p>
           <div className="flex gap-4 mt-4">

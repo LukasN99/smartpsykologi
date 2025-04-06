@@ -1,81 +1,109 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 export default function Header() {
   const underlineRef = useRef<HTMLSpanElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const [headerStyle, setHeaderStyle] = useState({});
+  const [isInitialized, setIsInitialized] = useState(false);
+
   const navItems = [
     { name: "About", href: "#about" },
-    { name: "Products", href: "#products" },
-    { name: "Articles", href: "#articles" },
-    { name: "Contact", href: "#contact" }, // Updated "Values" to "Contact"
+    { name: "The Platform", href: "#platform" },
+    { name: "Contact", href: "#contact" },
   ];
 
-  const setUnderlinePosition = (target: DOMRect) => {
-    if (underlineRef.current) {
-      underlineRef.current.style.left = `${target.left}px`;
+  const setUnderlinePosition = useCallback((target: DOMRect, immediate = false) => {
+    if (underlineRef.current && headerRef.current) {
+      const navBounds = headerRef.current.getBoundingClientRect();
+      const relativeLeft = target.left - navBounds.left;
+      
+      underlineRef.current.style.transition = immediate ? 'none' : 'all 0.3s ease';
+      underlineRef.current.style.left = `${relativeLeft}px`;
       underlineRef.current.style.width = `${target.width}px`;
+
+      if (immediate) {
+        underlineRef.current.getBoundingClientRect();
+      }
     }
-  };
+  }, []);
 
-  const updateUnderlineToActiveLink = () => {
-    const sections = navItems.map((item) =>
-      document.querySelector(item.href)
-    ) as HTMLElement[];
-    const currentScroll = window.scrollY + window.innerHeight / 2;
+  const updateUnderlineToActiveLink = useCallback(() => {
+    if (!isInitialized) return;
 
-    const activeSection = sections.find(
-      (section) =>
-        section.offsetTop <= currentScroll &&
-        section.offsetTop + section.offsetHeight > currentScroll
-    );
+    const sections = navItems
+      .map((item) => document.querySelector(item.href))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (sections.length === 0) return;
+
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+    const viewportMid = scrollY + viewportHeight / 2;
+
+    const activeSection = sections.find((section) => {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = scrollY + rect.top;
+      const sectionBottom = sectionTop + rect.height;
+      
+      return viewportMid >= sectionTop && viewportMid < sectionBottom;
+    }) || sections[0];
 
     if (activeSection) {
-      const navLink = document.querySelector(
+      const currentNavLink = document.querySelector(
         `a[href="#${activeSection.id}"]`
       ) as HTMLElement;
-      if (navLink) {
-        const rect = navLink.getBoundingClientRect();
-        setUnderlinePosition(rect);
+      
+      if (currentNavLink) {
+        const currentRect = currentNavLink.getBoundingClientRect();
+        setUnderlinePosition(currentRect);
+
         if (window.location.hash !== `#${activeSection.id}`) {
           window.history.replaceState(null, "", `#${activeSection.id}`);
         }
       }
     }
-  };
+  }, [isInitialized, setUnderlinePosition]);
 
   useEffect(() => {
     const initializeUnderline = () => {
-      const activeLink = document.querySelector(`a[href="#about"]`) as HTMLElement;
-      if (activeLink && underlineRef.current) {
+      const hash = window.location.hash || "#about";
+      const activeLink = document.querySelector(`a[href="${hash}"]`) || 
+                        document.querySelector('a[href="#about"]');
+      
+      if (activeLink instanceof HTMLElement) {
         const rect = activeLink.getBoundingClientRect();
-        underlineRef.current.style.left = `${rect.left}px`;
-        underlineRef.current.style.width = `${rect.width}px`;
-        underlineRef.current.style.transition = "none"; // No transition on initialization
+        setUnderlinePosition(rect, true);
+        
+        setTimeout(() => {
+          if (underlineRef.current) {
+            underlineRef.current.style.transition = 'all 0.3s ease';
+          }
+          setIsInitialized(true);
+        }, 0);
       }
     };
 
     initializeUnderline();
+    
+    const handleScroll = () => {
+      requestAnimationFrame(updateUnderlineToActiveLink);
+    };
 
-    // Add transition after initialization
-    setTimeout(() => {
-      if (underlineRef.current) {
-        underlineRef.current.style.transition = "left 0.3s ease, width 0.3s ease";
-      }
-    }, 0);
-
-    window.addEventListener("scroll", updateUnderlineToActiveLink);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", initializeUnderline);
 
     return () => {
-      window.removeEventListener("scroll", updateUnderlineToActiveLink);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", initializeUnderline);
     };
-  }, []);
+  }, [isInitialized, setUnderlinePosition, updateUnderlineToActiveLink]);
 
   useEffect(() => {
     const calculateScrollbarWidth = () => {
-      const container = document.querySelector("body > div.flex-grow") as HTMLElement;
-      if (!container) return;
+      const container = document.querySelector("body > div.flex-grow");
+      if (!container || !(container instanceof HTMLElement)) return;
 
       const scrollbarWidth = container.offsetWidth - container.clientWidth;
       setHeaderStyle({
@@ -91,30 +119,32 @@ export default function Header() {
     };
   }, []);
 
-  const handleHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const target = e.currentTarget.getBoundingClientRect();
-    setUnderlinePosition(target);
-  };
+  const handleHover = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setUnderlinePosition(rect);
+  }, [setUnderlinePosition]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     updateUnderlineToActiveLink();
-  };
+  }, [updateUnderlineToActiveLink]);
 
   return (
     <header
-      className="fixed top-0 z-50 box-border w-full"
-      style={{ ...headerStyle, backgroundColor: "rgba(0, 0, 0, 0.005)" }}
+      ref={headerRef}
+      className="absolute top-[64px] z-50 box-border w-full max-w-7xl left-1/2 -translate-x-1/2"
+      style={headerStyle}
     >
       <nav className="relative mx-auto flex justify-end py-4 px-6">
         <span
           ref={underlineRef}
-          className="nav-underline absolute bottom-0 h-[2px] bg-[#ffffff]"
+          className="nav-underline absolute bottom-0 h-[2px] bg-[#E85C3A] transition-all duration-300 ease-in-out"
+          style={{ left: 0, width: 0 }}
         ></span>
         {navItems.map((item) => (
           <a
             key={item.name}
             href={item.href}
-            className="relative px-6 text-lg font-medium text-[#ffffff] hover:font-bold transition-all"
+            className="relative px-6 text-lg text-[#072707] transition-all"
             onMouseEnter={handleHover}
             onMouseLeave={handleMouseLeave}
           >

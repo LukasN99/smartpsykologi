@@ -1,71 +1,80 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import HeroSection from "./components/MainSection";
+import MainSection from "./components/MainSection";
 import ProductsSection from "./components/ProductsSection";
-import ArticlesSection from "./components/ArticlesSection";
 import ContactSection from "./components/ContactSection";
 
 export default function RootLayout() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  const updateNavUnderline = useCallback((activeSection: Element) => {
+    const navLink = document.querySelector(
+      `a[href="#${activeSection.id}"]`
+    ) as HTMLElement;
+    const underline = document.querySelector(
+      ".nav-underline"
+    ) as HTMLElement;
+
+    if (navLink && underline) {
+      underline.style.left = `${navLink.offsetLeft}px`;
+      underline.style.width = `${navLink.offsetWidth}px`;
+
+      if (window.location.hash !== `#${activeSection.id}`) {
+        window.history.replaceState(null, "", `#${activeSection.id}`);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) {
-      console.error("scrollContainerRef is null");
-      return;
-    }
+    if (!container) return;
 
     const sections = Array.from(container.querySelectorAll("section")) as HTMLElement[];
-    console.log("Sections found:", sections);
+    let observer: IntersectionObserver;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const activeSection = entry.target;
-            const navLink = document.querySelector(
-              `a[href="#${activeSection.id}"]`
-            ) as HTMLElement;
-            const underline = document.querySelector(
-              ".nav-underline"
-            ) as HTMLElement;
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          updateNavUnderline(entry.target);
+        }
+      });
+    };
 
-            if (navLink && underline) {
-              underline.style.left = `${navLink.offsetLeft}px`;
-              underline.style.width = `${navLink.offsetWidth}px`;
-
-              if (window.location.hash !== `#${activeSection.id}`) {
-                window.history.replaceState(null, "", `#${activeSection.id}`);
-              }
-            }
-          }
-        });
-      },
-      {
-        root: container,
-        threshold: 0.5,
-      }
-    );
+    observer = new IntersectionObserver(observerCallback, {
+      root: container,
+      threshold: 0.5,
+    });
 
     sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [updateNavUnderline]);
 
   return (
     <html lang="en" className="overflow-hidden">
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col h-screen overflow-hidden bg-[#faefe0]">
         <Header />
-        <div ref={scrollContainerRef} className="flex-grow overflow-y-auto relative">
-          <HeroSection />
+        <main 
+          ref={scrollContainerRef} 
+          className="flex-1 overflow-y-auto scroll-smooth"
+          style={{ 
+            scrollSnapType: 'y mandatory',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
+          <MainSection />
           <ProductsSection />
-          <ArticlesSection />
           <ContactSection />
           <Footer />
-        </div>
+        </main>
       </body>
     </html>
   );
