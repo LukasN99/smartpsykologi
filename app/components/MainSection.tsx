@@ -12,7 +12,7 @@ export default function MainSection() {
         height: 'calc(100vh - 64px)', // Account for header height
       }}
     >
-      <div className="relative w-[80%] aspect-[2/1] bg-[#879D8B] rounded-lg overflow-hidden mx-auto mt-4">
+      <div className="relative w-[80%] aspect-[2/1] bg-[#879D8B] rounded-lg overflow-hidden mx-auto mt-6">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
