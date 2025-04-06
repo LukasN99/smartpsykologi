@@ -6,14 +6,11 @@ import PopupModal from './PopupModal';
 
 const features = [
   {
-    title: "TRACK TREATMENT OUTCOMES OVER TIME",
+    title: "USER-POWERED RESEARCH",
     description: "Enabling continuous effect measurement. Works smoothly with push notifications and reminders.",
     image: "/tracking.png",
     detailedContent: [
-      "Our advanced tracking system enables both practitioners and clients to monitor treatment progress in real-time, providing valuable insights into the effectiveness of interventions.",
-      "The platform uses sophisticated algorithms to analyze treatment outcomes, helping identify patterns and adjust approaches for optimal results. This data-driven approach ensures that treatment strategies can be refined and personalized for each individual.",
-      "Regular push notifications and smart reminders help maintain engagement and ensure consistent tracking, while respecting user privacy and preferences. The system adapts to user behavior patterns to optimize notification timing and frequency.",
-      "Comprehensive reporting features allow for detailed analysis of progress over time, with visual representations that make it easy to understand and share results with relevant stakeholders."
+      "Our platform is designed to make every user part of something bigger. By integrating validated clinical questionnaires directly into the digital experience – such as KSQ, ISI, and GAD-7 – we allow users to track their own development while contributing to science. Every entry, every reflection, every change over time adds to a growing body of data. This creates a unique feedback loop: users gain insight into their own wellbeing, while researchers collect anonymized, real-world data to evaluate interventions, improve digital tools, and drive innovation in mental health. Ethically approved and securely handled, this user-powered research model helps bridge the gap between treatment and discovery – making digital psychology not just accessible, but scientifically valuable."
     ]
   },
   {
@@ -21,21 +18,15 @@ const features = [
     description: "In a user-friendly interface, where content is presented step-by-step or in weekly modules.",
     image: "/materials.png",
     detailedContent: [
-      "Our treatment materials are carefully curated and based on the latest research in psychological interventions and therapeutic techniques. Each module is designed to deliver maximum impact while remaining accessible and engaging.",
-      "The step-by-step approach ensures that users can progress at their own pace, with each concept building naturally upon previous learning. This structured approach helps maintain motivation and ensures thorough understanding.",
-      "Weekly modules are designed to provide a perfect balance between learning new concepts and practical application. Each module includes interactive elements, exercises, and reflection opportunities.",
-      "The content is regularly updated to reflect new research findings and best practices in psychological treatment, ensuring users always have access to the most current and effective materials."
+      "The platform is built on evidence-based psychological content. Users gain access to self-help materials covering stress management, sleep improvement, depression recovery, anxiety, ADHD, and daily structure support. The content is interactive, accessible, and presented step-by-step – either individually or in group settings. Each module is rooted in research from clinical psychology and behavioral science."
     ]
   },
   {
-    title: "STRUCTURED GROUP THERAPY SESSIONS ONLINE",
-    description: "Led by psychology students or licensed professionals within regions.",
+    title: "ONLINE CLOSED SELF-HELP GROUPS",
+    description: "Follow the self-help material with others in online video-rooms ",
     image: "/group.png",
     detailedContent: [
-      "Our online group therapy sessions create a supportive and collaborative environment where participants can share experiences and learn from each other under professional guidance.",
-      "Sessions are carefully structured to ensure all participants can engage meaningfully while maintaining appropriate boundaries and professional standards. The online format makes it easy to join from anywhere while maintaining privacy.",
-      "Groups are led by qualified professionals or advanced psychology students under supervision, ensuring high-quality therapeutic experiences that adhere to best practices and ethical guidelines.",
-      "The platform provides specialized tools for group facilitators to manage sessions effectively, including features for breakout rooms, shared resources, and progress tracking across group members."
+      "The platform allows users to join secure, closed self-help groups – called Connect Rooms. These provide a safe space for individuals facing similar challenges to meet anonymously and follow structured, evidence-based programs together. Through guided exercises and shared progress, users experience a sense of belonging and increased motivation. The rooms are designed for international access, with full support for multilingual and culturally adapted experiences."
     ]
   }
 ];
@@ -47,7 +38,7 @@ const FeatureCard = memo(({ feature, index, onSelect }: {
   onSelect: (index: number) => void 
 }) => (
   <motion.div
-    className="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col h-full"
+    className="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col w-[85%] mx-auto transform scale-75 min-h-[400px]"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -63,14 +54,16 @@ const FeatureCard = memo(({ feature, index, onSelect }: {
         sizes="(max-width: 768px) 100vw, 33vw"
       />
     </div>
-    <div className="p-4 flex flex-col flex-grow">
-      <h3 className="text-lg mb-2 text-[#E85C3A] text-center">
-        {feature.title}
-      </h3>
-      <p className="text-[#072707] text-base text-center mb-4">
-        {feature.description}
-      </p>
-      <div className="flex justify-center items-center mt-auto">
+    <div className="flex flex-col h-full relative p-3">
+      <div className="mt-2">
+        <h3 className="text-lg mb-2 text-[#E85C3A] text-center">
+          {feature.title}
+        </h3>
+        <p className="text-[#072707] text-base text-center">
+          {feature.description}
+        </p>
+      </div>
+      <div className="absolute bottom-3 left-0 right-0 flex justify-center">
         <button 
           onClick={() => onSelect(index)}
           className="text-[#E85C3A] text-base font-medium hover:font-bold transition-all cursor-pointer"
@@ -90,14 +83,11 @@ export default function ProductsSection() {
   return (
     <section 
       id="platform" 
-      className="w-full snap-start snap-always bg-[#faefe0]"
-      style={{
-        height: 'calc(100vh - 64px)',
-      }}
+      className="w-full snap-start snap-always bg-[#faefe0] py-8 pb-32 pt-24"
     >
-      <div className="h-full flex flex-col py-8 px-4">
+      <div className="flex flex-col px-4">
         <motion.h2 
-          className="text-3xl text-center mb-8 text-[#072707]"
+          className="text-3xl text-center mb-6 text-[#072707]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -105,7 +95,7 @@ export default function ProductsSection() {
         >
           Project idea "The Platform"
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto flex-1 px-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-2">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
