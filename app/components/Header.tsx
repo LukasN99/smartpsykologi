@@ -11,7 +11,7 @@ export default function Header() {
   const navItems = [
     { name: "About", href: "#about" },
     { name: "The Platform", href: "#platform" },
-    { name: "Contact", href: "#contact" },
+    { name: "The Strategies", href: "#strategies" },
   ];
 
   const setUnderlinePosition = useCallback((target: DOMRect, immediate = false) => {
@@ -131,10 +131,10 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="absolute top-[64px] z-50 box-border w-full max-w-7xl left-1/2 -translate-x-1/2"
+      className="absolute top-[48px] z-50 box-border w-full max-w-[80%] left-1/2 -translate-x-1/2"
       style={headerStyle}
     >
-      <nav className="relative mx-auto flex justify-end py-4 px-6">
+      <nav className="relative mx-auto flex justify-end py-2">
         <span
           ref={underlineRef}
           className="nav-underline absolute bottom-0 h-[2px] bg-[#E85C3A] transition-all duration-300 ease-in-out"
@@ -144,7 +144,7 @@ export default function Header() {
           <a
             key={item.name}
             href={item.href}
-            className="relative px-6 text-lg text-[#072707] transition-all"
+            className="relative px-6 text-base text-[#072707] transition-all"
             onMouseEnter={handleHover}
             onMouseLeave={handleMouseLeave}
           >

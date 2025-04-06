@@ -73,9 +73,9 @@ const FeatureCard = memo(({ feature, index, onSelect }: {
       <div className="flex justify-center items-center mt-auto">
         <button 
           onClick={() => onSelect(index)}
-          className="text-[#E85C3A] text-2xl cursor-pointer hover:scale-110 transition-transform"
+          className="text-[#E85C3A] text-base font-medium hover:font-bold transition-all cursor-pointer"
         >
-          ↓
+          READ MORE
         </button>
       </div>
     </div>

@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MainSection from "./components/MainSection";
 import ProductsSection from "./components/ProductsSection";
-import ContactSection from "./components/ContactSection";
+import StrategiesSection from "./components/StrategiesSection";
 
 export default function RootLayout() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -72,7 +72,7 @@ export default function RootLayout() {
         >
           <MainSection />
           <ProductsSection />
-          <ContactSection />
+          <StrategiesSection />
           <Footer />
         </main>
       </body>

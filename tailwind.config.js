@@ -13,4 +13,9 @@ module.exports = {
     },
   },
   plugins: [],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
+  mode: 'jit', // Enable JIT mode for better performance
 }
