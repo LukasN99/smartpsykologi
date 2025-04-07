@@ -6,28 +6,28 @@ import PopupModal from './PopupModal';
 
 const features = [
   {
-    title: "USER-POWERED RESEARCH",
-    description: "Enabling continuous effect measurement. Works smoothly with push notifications and reminders.",
+    title: "ANVÄNDARDRIVEN FORSKNING",
+    description: "Mät effekt över tid – med hjälp av dagliga skattningar, påminnelser och pushnotiser",
     image: "/tracking.png",
     detailedContent: [
-      "Our platform is designed to make every user part of something bigger. By integrating validated clinical questionnaires directly into the digital experience – such as KSQ, ISI, and GAD-7 – we allow users to track their own development while contributing to science. Every entry, every reflection, every change over time adds to a growing body of data. This creates a unique feedback loop: users gain insight into their own wellbeing, while researchers collect anonymized, real-world data to evaluate interventions, improve digital tools, and drive innovation in mental health. Ethically approved and securely handled, this user-powered research model helps bridge the gap between treatment and discovery – making digital psychology not just accessible, but scientifically valuable."
+      "Appen gör varje användare till en del av något större. Genom att integrera validerade kliniska skattningar som GAD-7, ISI och KSQ i det dagliga användandet möjliggör vi kontinuerlig mätning av effekt – både för individen och forskningen. Användare kan följa sin egen utveckling över tid, samtidigt som anonym data bidrar till att utvärdera och förbättra verktyget. All data hanteras etiskt och säkert enligt MDR och GDPR. Målet är en ny sorts psykologi: där varje insats ger dubbel effekt – personlig insikt och vetenskapligt värde."
     ]
   },
   {
-    title: "EVIDENCE-BASED TREATMENT MATERIALS",
-    description: "In a user-friendly interface, where content is presented step-by-step or in weekly modules.",
+    title: "SMART STRUKTUR & STÖD",
+    description: "Smarta alarm, kalenderfunktioner, påminnelser och dagsplanering",
     image: "/materials.png",
     detailedContent: [
-      "The platform is built on evidence-based psychological content. Users gain access to self-help materials covering stress management, sleep improvement, depression recovery, anxiety, ADHD, and daily structure support. The content is interactive, accessible, and presented step-by-step – either individually or in group settings. Each module is rooted in research from clinical psychology and behavioral science."
+      "Appen innehåller ett komplett strukturstöd anpassat för personer med kognitiva utmaningar. Här ingår bland annat smarta alarm, visuella dagsscheman, röstpåminnelser, checklistor och en flexibel kalender – allt utformat för att stärka minne, tidsuppfattning och självständighet. Funktionerna kan anpassas efter individens behov och integreras smidigt i vardagen. Systemet är framtaget enligt gällande krav för medicintekniska hjälpmedel och kombinerar användarvänlighet med klinisk tillförlitlighet."
     ]
   },
   {
-    title: "ONLINE CLOSED SELF-HELP GROUPS",
-    description: "Follow the self-help material with others in online video-rooms ",
+    title: "EVIDENSBASERAT MATERIAL",
+    description: "Få tillgång till digitala självhjälpsprogram för stress, sömn och ADHD",
     image: "/group.png",
     detailedContent: [
-      "The platform allows users to join secure, closed self-help groups – called Connect Rooms. These provide a safe space for individuals facing similar challenges to meet anonymously and follow structured, evidence-based programs together. Through guided exercises and shared progress, users experience a sense of belonging and increased motivation. The rooms are designed for international access, with full support for multilingual and culturally adapted experiences."
-    ]
+      "Appens innehåll bygger på evidensbaserad psykologi och beteendevetenskap. Användaren får tillgång till självhjälpsmaterial för att hantera stress, förbättra sömn, förstå ADHD eller stärka sin vardagsstruktur. Programmen är uppbyggda i moduler och kan användas självständigt eller i kombination med professionellt stöd. Innehållet är interaktivt, lättillgängligt och anpassningsbart – med påminnelser, delmål och stöd för att skapa hållbar förändring i vardagen."
+        ]
   }
 ];
 
@@ -86,15 +86,21 @@ export default function ProductsSection() {
       className="w-full snap-start snap-always bg-[#faefe0] py-8 pb-32 pt-24"
     >
       <div className="flex flex-col px-4">
-        <motion.h2 
-          className="text-3xl text-center mb-6 text-[#072707]"
+        <motion.div
+          className="relative mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          Project idea "The Platform"
-        </motion.h2>
+          <h2 className="text-4xl md:text-3xl font-bold text-center mb-4 text-[#072707] relative">
+            <span className="relative z-10">Det vi vill erbjuda</span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-[#E85C3A] rounded-full"></span>
+          </h2>
+          <p className="text-lg text-[#E85C3A] text-center italic mt-4">
+            En plattform för bättre vardag och hälsa
+          </p>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-2">
           {features.map((feature, index) => (
             <FeatureCard

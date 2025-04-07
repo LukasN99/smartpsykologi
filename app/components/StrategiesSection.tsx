@@ -20,7 +20,7 @@ export default function StrategiesSection() {
             className="w-28 h-28 relative transition-transform hover:scale-105"
           >
             <Image
-              src={activeTab === 'path1' ? '/topath2.png' : '/topath1.png'}
+              src={activeTab === 'path1' ? '/flip.png' : '/flip.png'}
               alt={activeTab === 'path1' ? 'Go to Path 2' : 'Go to Path 1'}
               fill
               style={{ objectFit: 'contain' }}
@@ -43,65 +43,68 @@ export default function StrategiesSection() {
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-16">
                   <div className="max-w-4xl mx-auto">
                     <h2 className="text-3xl text-[#072707] font-bold mb-4 text-center">
-                      Path 1 – The Self-Help App
+                      Vår Vision
                     </h2>
                     <h3 className="text-lg text-[#E85C3A] font-medium mb-8 text-center italic">
-                      From Everyday Support to Scalable Global Reach
+                      En digital medicinteknisk app för personer med kognitiva svårigheter
                     </h3>
                    
                     <div className="space-y-6 text-[#072707]">
                       <div className="space-y-4">
                         <p className="text-base leading-relaxed">
-                          This path begins with the launch of a mobile app aimed directly at individuals seeking better routines, improved sleep, stress management, or increased daily structure. It is not classified as healthcare, but functions as a practical, evidence-based behavioral support tool. The app includes features rooted in psychological research, such as movement- or heart-rate-triggered alarms, structured planning tools for users with executive function challenges, and step-by-step guidance for improving sleep and focus.
+                          Vi utvecklar ett smart verktyg som ersätter traditionella hjälpmedel som klockor, kalendrar, larm och anteckningsblock. Appen samlar dessa funktioner i en användarvänlig, intelligent plattform med målet att:
                         </p>
-                        <p className="text-base leading-relaxed">
-                          Unlike healthcare-bound solutions, this app is available globally via the App Store and Google Play, removing administrative and regulatory barriers. That allows for faster launch, easier user access, and early user data generation to guide development. It also provides a way to begin building a brand and engage users before the more complex healthcare-oriented product is finalized.
-                        </p>
-                        <p className="text-base leading-relaxed">
-                          Though initially standalone, the app is designed to evolve – with features like Connect Rooms, where users with similar challenges can join structured programs together. These programs would mirror the content from the clinical platform but in a self-guided, subscription-based format.
+                        <ul className="space-y-2 list-disc pl-6">
+                          <li>Öka struktur, självständighet och trygghet i vardagen</li>
+                          <li>Stärka individens egen förmåga genom påminnelser, planeringsstöd och självskattningar</li>
+                          <li>Kombinera funktionellt stöd med evidensbaserat innehåll för psykologisk egenvård</li>
+                          <li>Möjliggöra datainsamling för forskning och kontinuerlig produktförbättring</li>
+                        </ul>
+                        <p className="text-base leading-relaxed mt-4">
+                          Appen riktar sig till både privatpersoner och vårdgivare, med särskild potential inom neuropsykiatri, rehabilitering och stödboenden.
                         </p>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                         <div className="bg-white/30 rounded-lg p-6 shadow-sm">
-                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Advantages</h3>
+                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Regulatoriska Krav</h3>
                           <ul className="space-y-2">
                             <li className="flex items-center text-base">
                               <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Can be launched quickly without regulatory approval
+                              CE-märkning (klass IIa enligt MDR)
                             </li>
                             <li className="flex items-center text-base">
                               <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Global accessibility from day one
+                              IEC 62304 för mjukvaruutveckling
                             </li>
                             <li className="flex items-center text-base">
                               <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Builds awareness and brand trust
+                              ISO 14971 för riskhantering
                             </li>
                             <li className="flex items-center text-base">
                               <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Revenue potential through subscriptions
-                            </li>
-                            <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Real-world feedback from end users
+                              PRRC (ansvarig person)
                             </li>
                           </ul>
                         </div>
                         <div className="bg-white/30 rounded-lg p-6 shadow-sm">
-                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Challenges</h3>
+                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Dataskydd & Forskning</h3>
                           <ul className="space-y-2">
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">•</span>
-                              Needs a clear identity to stand out among competing apps
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              GDPR-efterlevnad
                             </li>
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">•</span>
-                              Must deliver real value early to retain users
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              Säker datahantering
                             </li>
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">•</span>
-                              Long-term development and content upkeep are essential
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              Kliniska samarbeten
+                            </li>
+                            <li className="flex items-center text-base">
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              Vetenskaplig publicering
                             </li>
                           </ul>
                         </div>
@@ -124,61 +127,70 @@ export default function StrategiesSection() {
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-16">
                   <div className="max-w-4xl mx-auto">
                     <h2 className="text-3xl text-[#072707] font-bold mb-4 text-center">
-                      Path 2 – The Clinical Platform
+                      Att Lansera en Medicinteknisk App
                     </h2>
                     <h3 className="text-lg text-[#E85C3A] font-medium mb-8 text-center italic">
-                      A Scalable Tool for Public Health Services
+                      En omfattande process med stora möjligheter
                     </h3>
                    
                     <div className="space-y-6 text-[#072707]">
                       <div className="space-y-4">
                         <p className="text-base leading-relaxed">
-                          The second path takes a different route: building a platform for clinics and public healthcare providers. This platform is designed to facilitate structured, evidence-based psychological treatment in digital form – including psychoeducation modules, interactive group sessions, and built-in assessment tools using validated instruments like KSQ, GAD-7, and ISI.
+                          Att lansera en medicinteknisk app kräver noggrann planering, särskilt om appen har ett medicinskt syfte – såsom att stödja kognitiv funktion och självständighet hos personer med neuropsykiatriska svårigheter. För att uppfylla EU:s MDR-förordning måste man först fastställa att appen omfattas av regelverket, därefter klassificera risknivån (i vårt fall sannolikt klass IIa), och planera CE-märkningsstrategi därefter.
                         </p>
                         <p className="text-base leading-relaxed">
-                          This solution is not aimed at the individual but at institutions – regions, health centers, or university clinics – that want to offer high-quality, low-threshold digital support. The platform is delivered as a ready-to-use system, including content, hosting, technical support, and secure user handling in accordance with GDPR and Swedish healthcare law.
-                        </p>
-                        <p className="text-base leading-relaxed">
-                          This approach requires more time to implement but comes with academic legitimacy, strong ties to research, and the possibility to directly contribute to clinical outcomes and new scientific knowledge. It positions the project as a serious actor in the future of digital mental health.
+                          Även om processen är omfattande innebär det också en konkurrensfördel: få aktörer tar sig igenom regulatoriska nålsögat, vilket stärker både trovärdighet och affärsposition.
                         </p>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                         <div className="bg-white/30 rounded-lg p-6 shadow-sm">
-                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Advantages</h3>
+                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Nyckelsteg</h3>
                           <ul className="space-y-2">
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Rooted in academic research and ethical standards
+                              <span className="mr-2 text-[#E85C3A]">1</span>
+                              Identifiera appen som medicinteknisk produkt
                             </li>
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Fulfills a real need in Swedish healthcare
+                              <span className="mr-2 text-[#E85C3A]">2</span>
+                              Riskklassificera enligt MDR (klass IIa)
                             </li>
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Enables collaborations with universities and licensed psychologists
+                              <span className="mr-2 text-[#E85C3A]">3</span>
+                              Planera CE-märkningsstrategi
                             </li>
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">✓</span>
-                              Supports data-driven treatment and real-time measurement
+                              <span className="mr-2 text-[#E85C3A]">4</span>
+                              Utforma teknisk dokumentation
+                            </li>
+                            <li className="flex items-center text-base">
+                              <span className="mr-2 text-[#E85C3A]">5</span>
+                              Hantera forskningsdata
+                            </li>
+                            <li className="flex items-center text-base">
+                              <span className="mr-2 text-[#E85C3A]">6</span>
+                              Utse PRRC
                             </li>
                           </ul>
                         </div>
                         <div className="bg-white/30 rounded-lg p-6 shadow-sm">
-                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Challenges</h3>
+                          <h3 className="text-xl font-bold mb-4 text-[#E85C3A]">Affärsmässiga Slutsatser</h3>
                           <ul className="space-y-2">
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">•</span>
-                              Slower rollout due to public procurement and negotiations
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              Klass IIa kräver mer resurser men ger starkare medicinskt värde
                             </li>
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">•</span>
-                              Higher technical and legal requirements
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              CE-märkning är en konkurrensfördel
                             </li>
                             <li className="flex items-center text-base">
-                              <span className="mr-2 text-[#E85C3A]">•</span>
-                              Greater initial investment in platform infrastructure
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              Klinisk evidens stärker marknadsposition
+                            </li>
+                            <li className="flex items-center text-base">
+                              <span className="mr-2 text-[#E85C3A]">✓</span>
+                              Löpande uppföljning krävs efter lansering
                             </li>
                           </ul>
                         </div>
