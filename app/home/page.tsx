@@ -8,15 +8,15 @@ import Footer from '../components/Footer';
 
 export default function HomePage() {
   const router = useRouter();
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
 
   useEffect(() => {
     // Check if the user has entered the correct password
-    const isAuthenticated = sessionStorage.getItem('isAuthenticated');
-    if (!isAuthenticated) {
-      router.push('/');
-      return;
-    }
+    // const isAuthenticated = sessionStorage.getItem('isAuthenticated');
+    // if (!isAuthenticated) {
+    //   router.push('/');
+    //   return;
+    // }
     setIsAuthorized(true);
 
     // Handle initial hash navigation if present

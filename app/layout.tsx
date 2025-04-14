@@ -21,10 +21,10 @@ export default function RootLayout({
   useEffect(() => {
     // Check authentication for all routes except the root path
     if (pathname !== '/') {
-      const isAuthenticated = sessionStorage.getItem('isAuthenticated');
-      if (!isAuthenticated) {
-        router.push('/');
-      }
+      // const isAuthenticated = sessionStorage.getItem('isAuthenticated');
+      // if (!isAuthenticated) {
+      //   router.push('/');
+      // }
     }
   }, [pathname, router]);
 
