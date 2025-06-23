@@ -5,28 +5,17 @@ import { usePathname, useRouter } from "next/navigation";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import MainSection from "./components/MainSection";
-import ProductsSection from "./components/ProductsSection";
-import StrategiesSection from "./components/StrategiesSection";
+import HomeSection from "./components/HomeSection";
+import AboutSection from "./components/AboutSection";
+import ContactSection from "./components/ContactSection";
+import FormsSection from "./components/FormsSection";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const router = useRouter();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Check authentication for all routes except the root path
-    if (pathname !== '/') {
-      // const isAuthenticated = sessionStorage.getItem('isAuthenticated');
-      // if (!isAuthenticated) {
-      //   router.push('/');
-      // }
-    }
-  }, [pathname, router]);
 
   const updateNavUnderline = useCallback((activeSection: Element) => {
     const navLink = document.querySelector(
@@ -44,7 +33,7 @@ export default function RootLayout({
 
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container || pathname === '/') return;
+    if (!container) return;
 
     const sections = Array.from(container.querySelectorAll("section")) as HTMLElement[];
     let observer: IntersectionObserver;
@@ -53,6 +42,11 @@ export default function RootLayout({
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           updateNavUnderline(entry.target);
+          // Update URL hash without triggering scroll
+          const newHash = `#${entry.target.id}`;
+          if (window.location.hash !== newHash) {
+            window.history.replaceState(null, '', newHash);
+          }
         }
       });
     };
@@ -69,35 +63,30 @@ export default function RootLayout({
         observer.disconnect();
       }
     };
-  }, [updateNavUnderline, pathname]);
+  }, [updateNavUnderline]);
 
-  // If we're on the root path ('/'), render just the landing page
-  if (pathname === '/') {
-    return (
-      <html lang="en">
-        <body className="bg-[#faefe0]">
-          {children}
-        </body>
-      </html>
-    );
-  }
-
-  // For authenticated routes, render the full layout with header
   return (
-    <html lang="en" className="overflow-hidden">
-      <body className="flex flex-col h-screen overflow-hidden bg-[#faefe0]">
+    <html lang="sv" className="scroll-smooth">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title>Smart Psykologi | Digitala verktyg för vardagen</title>
+        <meta name="description" content="Vi skapar digitala verktyg för vardagen – anpassade för personer med (och utan) NPF." />
+      </head>
+      <body className="font-roboto text-gray-900 antialiased">
         <Header />
         <main 
           ref={scrollContainerRef} 
-          className="flex-1 overflow-y-auto scroll-smooth"
+          className="flex-1 w-full overflow-y-auto scroll-smooth"
           style={{ 
             scrollSnapType: 'y mandatory',
             WebkitOverflowScrolling: 'touch',
+            scrollPaddingTop: '64px', // Adjust for mobile header
           }}
         >
-          <MainSection />
-          <ProductsSection />
-          <StrategiesSection />
+          <HomeSection />
+          <FormsSection />
+          <AboutSection />
+          <ContactSection />
           <Footer />
         </main>
       </body>

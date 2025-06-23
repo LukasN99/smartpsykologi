@@ -1,22 +1,23 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import MainSection from '../components/MainSection';
-import ProductsSection from '../components/ProductsSection';
-import StrategiesSection from '../components/StrategiesSection';
+import HomeSection from '../components/HomeSection';
+import FormsSection from '../components/FormsSection';
+import AboutSection from '../components/AboutSection';
+import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 
 export default function HomePage() {
   const router = useRouter();
-  const [isAuthorized, setIsAuthorized] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
     // Check if the user has entered the correct password
-    // const isAuthenticated = sessionStorage.getItem('isAuthenticated');
-    // if (!isAuthenticated) {
-    //   router.push('/');
-    //   return;
-    // }
+    const isAuthenticated = sessionStorage.getItem('isAuthenticated');
+    if (!isAuthenticated) {
+      router.push('/');
+      return;
+    }
     setIsAuthorized(true);
 
     // Handle initial hash navigation if present
@@ -40,9 +41,10 @@ export default function HomePage() {
         WebkitOverflowScrolling: 'touch',
       }}
     >
-      <MainSection />
-      <ProductsSection />
-      <StrategiesSection />
+      <HomeSection />
+      <FormsSection />
+      <AboutSection />
+      <ContactSection />
       <Footer />
     </main>
   );
